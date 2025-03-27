@@ -5,8 +5,10 @@
 #include <HardwareSerial.h>       // Para comunicação serial com o DFPlayer
 
 // Definição dos pinos da ESP32 para comunicação com o DFPlayer Mini
-static const uint8_t PIN_MP3_TX = 26;  // Pino TX da ESP32 → RX do DFPlayer
+static const uint8_t PIN_MP3_TX = 26;  // Não usar os GPIO 9(17) e GPIO 10(18)
 static const uint8_t PIN_MP3_RX = 27;  // Pino RX da ESP32 → TX do DFPlayer
+
+//poderia usar o UART0(só pra debug), talvez simplificaria o código
 
 HardwareSerial mySerial(1);  // Usa Serial1 (UART1) da ESP32
 
@@ -15,7 +17,7 @@ DFRobotDFPlayerMini player;
 
 void setup() {
     // Inicializa a comunicação serial com o computador (para debug)
-    Serial.begin(115200);
+    Serial.begin(115200); //se der ruim muda pra 9600
     
     // Inicializa o Dabble Bluetooth com o nome do dispositivo
     Dabble.begin("RAITec_BB8");
@@ -26,7 +28,7 @@ void setup() {
     Serial.println("Inicializando DFPlayer...");
     
     // Iniciar o DFPlayer Mini
-    if (player.begin(mySerial)) {
+    if (player.begin(mySerial)) { //checa se a comunicação é válida
         Serial.println("DFPlayer Mini inicializado com sucesso!");
         
         // Configurações iniciais do player:
@@ -54,7 +56,7 @@ void loop() {
         delay(300);  // Debounce (evita leituras múltiplas)
     }
     
-    // Botão RIGHT → Toca música aleatória da pasta 3 (BB8 feliz)
+    // Botão RIGHT → Toca música aleatória da pasta 3 (BB8 feliz):
     if (GamePad.isRightPressed()) {
         playRandomFromFolder(3);
         delay(300);
@@ -109,5 +111,5 @@ void playRandomFromFolder(uint8_t folder) {
     Serial.println(randomTrack);
     
     // Comanda o DFPlayer tocar a faixa selecionada
-    player.playFolder(folder, randomTrack);
+    player.playFolder(folder, randomTrack); //Nome da pasta vai de 1 até 99 e o nome da musica vai de 1 até 255
 }
