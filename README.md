@@ -35,7 +35,8 @@ git merge --squash [nome] #Isso vai juntar todos os commits em um
 git commit -m "mensagem breve explicando as mudanças"
 ```
 
-> Colocando as mudanças no site(remoto)
+> Colocando as mudanças no site(remoto) e apagando o branch de bug fix
 ```
 git push -u origin testes
+git branch -d [nome]
 ```
