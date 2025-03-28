@@ -22,29 +22,20 @@ Ou seja, esse branch oferece:
 - Quando for realizar um testes ou resolver algum enventual problema que surigr no código crie um **branch** a partir deste, por exemplo, o bb8 não está tocando música interagindo com o ambiente, então será feito um branch de nome *interação ambiente* para resolver esse problema:
 ```
 git checkout testes
-git checkout -b interacao_ambiente
+git checkout -b interacao_ambiente #esse é só o exemplo, a partir de agora vou usar [nome]
 ```
 - Após resolver o problema faça essa sequência de comandos para adicionar ao branch testes:
-> Salvar as mudanças
-
-```
-git add .
-git commit -m "mensagem breve explicando as mudanças"
-```
-> Juntar os branches em um só
-
-```
-git pull origin master
-git rebase testes
-```
-> Atualizar os ponteiros
+> Juntar os branches em um só e salvar as mudanças
 
 ```
 git checkout testes
-git merge interacao_ambiente
+git pull origin master
+git add .
+git merge --squash [nome] #Isso vai juntar todos os commits em um
+git commit -m "mensagem breve explicando as mudanças"
 ```
 
-> Colocando as mudanças no site
+> Colocando as mudanças no site(remoto)
 ```
 git push -u origin testes
 ```
