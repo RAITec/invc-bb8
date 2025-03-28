@@ -34,7 +34,7 @@ git commit -m "mensagem breve explicando as mudanças"
 > Juntar os branches em um só
 
 ```
-git pull m
+git pull origin master
 git rebase testes
 ```
 > Atualizar os ponteiros
@@ -46,6 +46,5 @@ git merge interacao_ambiente
 
 > Colocando as mudanças no site
 ```
-git pull origin master
 git push -u origin testes
 ```
