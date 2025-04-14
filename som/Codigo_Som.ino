@@ -15,7 +15,7 @@ DFRobotDFPlayerMini player;
 
 void setup() {
     // Inicializa a comunicação serial com o computador (para debug)
-    Serial.begin(115200);
+    Serial.begin(9600);
     
     // Inicializa o Dabble Bluetooth com o nome do dispositivo
     Dabble.begin("RAITec_BB8");
@@ -50,30 +50,33 @@ void loop() {
     
     // Botão UP → Toca música aleatória da pasta 2 (BB8 bravo)
     if (GamePad.isUpPressed()) {
-        playRandomFromFolder(2);
+        player.playFolder(2,1);
+        Serial.println("Tocando musica 1 da pasta 2");
         delay(300);  // Debounce (evita leituras múltiplas)
     }
     
     // Botão RIGHT → Toca música aleatória da pasta 3 (BB8 feliz)
     if (GamePad.isRightPressed()) {
-        playRandomFromFolder(3);
+        player.playFolder(3,3);
+        Serial.println("Tocando musica 3 da pasta 3");
         delay(300);
     }
     
     // Botão DOWN → Toca música aleatória da pasta 4 (raitecos)
     if (GamePad.isDownPressed()) {
-        playRandomFromFolder(4);
+        player.playFolder(4,1);
+        Serial.println("Tocando musica 1 da pasta 4");
         delay(300);
     }
     
-    // Botão TRIÂNGULO → Aumenta volume
+    // Botão TRIÂNGULO → Aumenta volume (BUGADO)
     if (GamePad.isTrianglePressed()) {
         player.volumeUp();
         Serial.println("Volume aumentado");
         delay(300);
     }
     
-    // Botão X (CRUZ) → Diminui volume
+    // Botão X (CRUZ) → Diminui volume (BUGADO)
     if (GamePad.isCrossPressed()) {
         player.volumeDown();
         Serial.println("Volume diminuído");
